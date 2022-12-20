@@ -1,0 +1,45 @@
+version: "3.9"
+services:
+  shardsvr1:
+    container_name: shardsvr1
+    image: mongo:4.4.14
+    ports:
+      - 40021:27018
+    volumes:
+      - shardsvr1:/data/db
+    command: mongod --shardsvr --replSet shardsvr_rs1 --dbpath /data/db
+    restart: always
+  shardsvr2:
+    container_name: shardsvr2
+    image: mongo:4.4.14
+    ports:
+      - 40022:27018
+    volumes:
+      - shardsvr2:/data/db
+    command: mongod --shardsvr --replSet shardsvr_rs1 --dbpath /data/db
+    restart: always
+  shardsvr3:
+    container_name: shardsvr3
+    image: mongo:4.4.14
+    ports:
+      - 40031:27018
+    volumes:
+      - shardsvr3:/data/db
+    command: mongod --shardsvr --replSet shardsvr_rs2 --dbpath /data/db
+    restart: always
+  shardsvr4:
+    container_name: shardsvr4
+    image: mongo:4.4.14
+    ports:
+      - 40032:27018
+    image: mongo:4.4.14
+    volumes:
+      - shardsvr4:/data/db
+    command: mongod --shardsvr --replSet shardsvr_rs2 --dbpath /data/db
+    restart: always
+
+volumes:
+  shardsvr1: {}
+  shardsvr2: {}
+  shardsvr3: {}
+  shardsvr4: {}

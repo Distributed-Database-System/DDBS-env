@@ -1,0 +1,34 @@
+version: "3.9"
+services:
+  configsvr1:
+    container_name: configsvr1
+    image: mongo:4.4.14
+    ports:
+      - 40011:27019
+    volumes:
+      - configsvr1:/data/db
+    command: mongod --configsvr --replSet configsvr_rs --dbpath /data/db
+    restart: always
+  configsvr2:
+    container_name: configsvr2
+    image: mongo:4.4.14
+    ports:
+      - 40012:27019
+    volumes:
+      - configsvr2:/data/db
+    command: mongod --configsvr --replSet configsvr_rs --dbpath /data/db
+    restart: always
+  configsvr3:
+    container_name: configsvr3
+    image: mongo:4.4.14
+    ports:
+      - 40013:27019
+    volumes:
+      - configsvr3:/data/db
+    command: mongod --configsvr --replSet configsvr_rs --dbpath /data/db
+    restart: always
+
+volumes:
+  configsvr1: {}
+  configsvr2: {}
+  configsvr3: {}

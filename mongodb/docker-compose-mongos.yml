@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  mongos:
+    container_name: mongos
+    image: mongo:4.4.14
+    ports:
+      - 40002:27017
+    volumes:
+      - mongos:/data/db
+    command: mongos --configdb configsvr_rs/configsvr1:27019,configsvr2:27019,configsvr3:27019 --bind_ip_all
+    restart: always
+
+volumes:
+  mongos: {}
